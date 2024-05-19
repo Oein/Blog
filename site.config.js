@@ -9,9 +9,9 @@ const CONFIG = {
     linkedin: "",
     github: "oein",
     instagram: "oein0219",
+    x: "oein0219",
   },
-  projects: [
-  ],
+  projects: [],
   // blog setting (required)
   blog: {
     title: "Oein's story",
