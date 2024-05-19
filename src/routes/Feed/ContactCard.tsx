@@ -44,7 +44,7 @@ const ContactCard: React.FC = () => {
             target="_blank"
           >
             <AiOutlineTwitter className="icon" />
-            <div className="name">x</div>
+            <div className="name">twitter</div>
           </a>
         )}
         {CONFIG.profile.email && (
