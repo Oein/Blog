@@ -11,7 +11,12 @@ const CONFIG = {
     instagram: "oein0219",
     x: "oein0219",
   },
-  projects: [],
+  projects: [
+    {
+      href: "https://github.com/Oein/chzzkExt",
+      name: "치직치지직",
+    },
+  ],
   // blog setting (required)
   blog: {
     title: "Oein's story",
