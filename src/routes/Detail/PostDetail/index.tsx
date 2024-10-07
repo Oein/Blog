@@ -9,6 +9,8 @@ import usePostQuery from "src/hooks/usePostQuery"
 
 type Props = {}
 
+import { RiNotionFill } from "react-icons/ri"
+
 const PostDetail: React.FC<Props> = () => {
   const data = usePostQuery()
 
@@ -27,6 +29,12 @@ const PostDetail: React.FC<Props> = () => {
           </div>
         )}
         {data.type[0] === "Post" && <PostHeader data={data} />}
+        <a href={`https://oein.notion.site/${data.id.replace(/-/g, "")}`}>
+          <NotionBTN>
+            <RiNotionFill />
+            View in Notion
+          </NotionBTN>
+        </a>
         <div>
           <NotionRenderer recordMap={data.recordMap} />
         </div>
@@ -59,4 +67,21 @@ const StyledWrapper = styled.div`
     margin: 0 auto;
     max-width: 42rem;
   }
+`
+
+const NotionBTN = styled.button`
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  line-height: 1rem;
+  font-weight: 400;
+  color: ${({ theme }) => theme.colors.gray12};
+  background-color: ${({ theme }) => theme.colors.gray5};
+  cursor: pointer;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
 `
