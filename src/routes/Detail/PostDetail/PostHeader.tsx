@@ -6,13 +6,34 @@ import Image from "next/image"
 import React from "react"
 import styled from "@emotion/styled"
 
+import Category from "src/components/Category"
+
 type Props = {
   data: TPost
 }
 
 const PostHeader: React.FC<Props> = ({ data }) => {
+  const category = (data.category && data.category?.[0]) || undefined
+
   return (
-    <StyledWrapper>
+    <StyledWrapper
+      css={{
+        background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${data.thumbnail})`,
+        backgroundSize: "cover",
+      }}
+    >
+      {category && (
+        <div
+          css={{
+            marginBottom: "0.5rem",
+          }}
+        >
+          <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
+            {category}
+          </Category>
+        </div>
+      )}
+
       <h1 className="title">{data.title}</h1>
       {data.type[0] !== "Paper" && (
         <nav>
@@ -48,7 +69,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
               </div>
             )}
           </div>
-          {data.thumbnail && (
+          {/* {data.thumbnail && (
             <div className="thumbnail">
               <Image
                 src={data.thumbnail}
@@ -57,7 +78,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
                 alt={data.title}
               />
             </div>
-          )}
+          )} */}
         </nav>
       )}
     </StyledWrapper>
@@ -67,6 +88,14 @@ const PostHeader: React.FC<Props> = ({ data }) => {
 export default PostHeader
 
 const StyledWrapper = styled.div`
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 1.5rem;
+
+  background-position: center;
+
   .title {
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -102,7 +131,6 @@ const StyledWrapper = styled.div`
     }
     > .mid {
       display: flex;
-      margin-bottom: 1rem;
       align-items: center;
       .tags {
         display: flex;

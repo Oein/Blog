@@ -2,7 +2,6 @@ import React from "react"
 import PostHeader from "./PostHeader"
 import Footer from "./PostFooter"
 import CommentBox from "./CommentBox"
-import Category from "src/components/Category"
 import styled from "@emotion/styled"
 import NotionRenderer from "../components/NotionRenderer"
 import usePostQuery from "src/hooks/usePostQuery"
@@ -16,19 +15,10 @@ const PostDetail: React.FC<Props> = () => {
 
   if (!data) return null
 
-  const category = (data.category && data.category?.[0]) || undefined
-
   return (
     <StyledWrapper>
-      <article>
-        {category && (
-          <div css={{ marginBottom: "0.5rem" }}>
-            <Category readOnly={data.status?.[0] === "PublicOnDetail"}>
-              {category}
-            </Category>
-          </div>
-        )}
-        {data.type[0] === "Post" && <PostHeader data={data} />}
+      {data.type[0] === "Post" && <PostHeader data={data} />}
+      <WRARTI>
         <a href={`https://oein.notion.site/${data.id.replace(/-/g, "")}`}>
           <NotionBTN>
             <RiNotionFill />
@@ -44,7 +34,7 @@ const PostDetail: React.FC<Props> = () => {
             <CommentBox data={data} />
           </>
         )}
-      </article>
+      </WRARTI>
     </StyledWrapper>
   )
 }
@@ -52,10 +42,6 @@ const PostDetail: React.FC<Props> = () => {
 export default PostDetail
 
 const StyledWrapper = styled.div`
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
   border-radius: 1.5rem;
   max-width: 56rem;
   background-color: ${({ theme }) =>
@@ -84,4 +70,11 @@ const NotionBTN = styled.button`
   display: flex;
   gap: 0.25rem;
   align-items: center;
+`
+
+const WRARTI = styled.div`
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 `
