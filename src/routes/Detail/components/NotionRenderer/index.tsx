@@ -69,6 +69,22 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
           Pdf,
           nextImage: Image,
           nextLink: Link,
+          PageLink: (props: {
+            className: string
+            children: any
+            href: string
+          }) => {
+            let href = props.href
+            if (props.className == "notion-link") {
+              const spli = props.href.split("/")
+              href = "/" + spli[spli.length - 1]
+            }
+            return (
+              <a href={href} className={props.className}>
+                {props.children}
+              </a>
+            )
+          },
         }}
         mapPageUrl={mapPageUrl}
       />

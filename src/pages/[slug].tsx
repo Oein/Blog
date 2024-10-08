@@ -22,7 +22,9 @@ export const getStaticPaths = async () => {
   const filteredPost = filterPosts(posts, filter)
 
   return {
-    paths: filteredPost.map((row) => `/${row.slug}`),
+    paths: filteredPost
+      .map((row) => [`/${row.slug}`, `/${row.id.replace(/-/g, "")}`])
+      .flat(),
     fallback: true,
   }
 }
@@ -35,7 +37,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
   await queryClient.prefetchQuery(queryKey.posts(), () => feedPosts)
 
   const detailPosts = filterPosts(posts, filter)
-  const postDetail = detailPosts.find((t: any) => t.slug === slug)
+  const postDetail = detailPosts.find((t: any) => {
+    return t.slug === slug || t.id.replace(/-/g, "") === slug
+  })
   const recordMap = await getRecordMap(postDetail?.id!)
 
   await queryClient.prefetchQuery(queryKey.post(`${slug}`), () => ({
