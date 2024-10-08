@@ -20,6 +20,7 @@ const PostHeader: React.FC<Props> = ({ data }) => {
       css={{
         background: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${data.thumbnail})`,
         backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       {category && (
