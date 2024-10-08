@@ -75,7 +75,10 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
             href: string
           }) => {
             let href = props.href
-            if (props.className == "notion-link") {
+            if (
+              props.className == "notion-link" &&
+              href.includes("notion.so")
+            ) {
               const spli = props.href.split("/")
               href = "/" + spli[spli.length - 1]
             }
