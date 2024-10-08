@@ -52,7 +52,7 @@ const FeedPage: NextPageWithLayout = () => {
           gap: ".5rem",
         }}
       >
-        <h1>Oein's Story</h1>
+        <h1>{CONFIG.blog.title}</h1>
         <div
           css={{
             color: "rgba(230, 230, 230, 0.8)",
